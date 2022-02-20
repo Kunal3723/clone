@@ -19,7 +19,7 @@ function App() {
   const [pageNo, setpageNo] = useState(1);
   const dispatch = useDispatch();
 
-
+// FUNCTION TO CALL YOUTUBE API
   async function callYoutubeSearchApi(keyword) {
     const response = await youtubeApi.get("/search", {
       params: {
@@ -33,14 +33,16 @@ function App() {
     })
   }
  
+  // FETCH VIDEOS FROM OUR REST API, WHENEVER WE CLICK NEXT OR PREVIOUS BUTTON
   useEffect(() => {
    
     dispatch(getVideos(pageNo));
   }, [pageNo])
 
+//CALL YOUTUBE API AFTER EVERY 60SEC
+   setInterval(function () { callYoutubeSearchApi("Cricket") }, 60000);
 
- //  setInterval(function () { callYoutubeSearchApi("Cricket") }, 10000);
-
+  
   function currVideo(id) {
 
     setstate({ ...state, selectedVideoId: id });
